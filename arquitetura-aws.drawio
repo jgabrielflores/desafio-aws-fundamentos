@@ -1,0 +1,109 @@
+<mxfile host="Electron">
+  <diagram id="RrqzzYpOQ_2qMHJyRDXZ" name="Página-1">
+    <mxGraphModel dx="1178" dy="701" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" parent="1"
+          style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#232F3E;"
+          value="Arquitetura de Processamento de Imagens — AWS" vertex="1">
+          <mxGeometry height="50" width="840" x="160" y="35" as="geometry" />
+        </mxCell>
+
+        <mxCell id="vpc" parent="1"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEF2FF;strokeColor=#8C4FFF;dashed=1;dashPattern=8 4;arcSize=3;verticalAlign=top;fontSize=13;fontStyle=1;fontColor=#8C4FFF;opacity=60;spacingTop=6;"
+          value="Amazon VPC" vertex="1">
+          <mxGeometry height="370" width="185" x="585" y="155" as="geometry" />
+        </mxCell>
+
+        <mxCell id="user" parent="1"
+          style="shape=mxgraph.aws4.user;fillColor=#232F3E;strokeColor=#232F3E;fontColor=#232F3E;fontSize=12;fontStyle=1;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;"
+          value="Usuário" vertex="1">
+          <mxGeometry height="60" width="60" x="20" y="267" as="geometry" />
+        </mxCell>
+
+        <mxCell id="s3in" parent="1"
+          style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#7AA116;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3"
+          value="S3 Bucket&#xa;imagens-originais" vertex="1">
+          <mxGeometry height="60" width="60" x="225" y="267" as="geometry" />
+        </mxCell>
+
+        <mxCell id="lambda" parent="1"
+          style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda"
+          value="AWS Lambda&#xa;Orquestrador" vertex="1">
+          <mxGeometry height="60" width="60" x="405" y="267" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ec2" parent="1"
+          style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ec2"
+          value="EC2 Instance&#xa;Processamento" vertex="1">
+          <mxGeometry height="60" width="60" x="637" y="193" as="geometry" />
+        </mxCell>
+
+        <!-- EBS como cilindro laranja (ícone nativo, sempre disponível) -->
+        <mxCell id="ebs" parent="1"
+          style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#ED7100;strokeColor=#BF5300;fontColor=#232F3E;fontSize=11;verticalLabelPosition=bottom;verticalAlign=top;align=center;"
+          value="EBS Volume&#xa;(OS + App + Temp)" vertex="1">
+          <mxGeometry height="60" width="60" x="637" y="375" as="geometry" />
+        </mxCell>
+
+        <mxCell id="s3out" parent="1"
+          style="outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#7AA116;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3"
+          value="S3 Bucket&#xa;imagens-processadas" vertex="1">
+          <mxGeometry height="60" width="60" x="865" y="267" as="geometry" />
+        </mxCell>
+
+        <!-- Snapshot como cilindro rosa tracejado (ícone nativo, sempre disponível) -->
+        <mxCell id="snapshot" parent="1"
+          style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#E7157B;strokeColor=#8C4FFF;fontColor=#232F3E;fontSize=11;verticalLabelPosition=bottom;verticalAlign=top;align=center;dashed=1;dashPattern=6 3;"
+          value="EBS Snapshot&#xa;(Backup / DR)" vertex="1">
+          <mxGeometry height="60" width="60" x="865" y="375" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a1" edge="1" source="user" target="s3in" parent="1"
+          style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;fontSize=10;fontStyle=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=block;endFill=1;strokeColor=#232F3E;fontColor=#000000;labelBackgroundColor=#ffffff;labelBorderColor=none;"
+          value="1. Upload da imagem">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a2" edge="1" source="s3in" target="lambda" parent="1"
+          style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;fontSize=10;fontStyle=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=block;endFill=1;strokeColor=#232F3E;fontColor=#000000;labelBackgroundColor=#ffffff;labelBorderColor=none;"
+          value="2. S3 Event Trigger">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a3" edge="1" source="lambda" target="ec2" parent="1"
+          style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;fontSize=10;fontStyle=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=block;endFill=1;strokeColor=#232F3E;fontColor=#000000;labelBackgroundColor=#ffffff;labelBorderColor=none;"
+          value="3. Aciona via AWS SDK">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a4" edge="1" source="ec2" target="ebs" parent="1"
+          style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=block;endFill=1;startArrow=block;startFill=1;strokeColor=#ED7100;fontColor=#000000;labelBackgroundColor=#ffffff;labelBorderColor=none;"
+          value="Leitura / Escrita">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a5" edge="1" source="ec2" target="s3out" parent="1"
+          style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;fontSize=10;fontStyle=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=block;endFill=1;strokeColor=#232F3E;fontColor=#000000;labelBackgroundColor=#ffffff;labelBorderColor=none;"
+          value="4. Salva imagem processada">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a6" edge="1" source="ebs" target="snapshot" parent="1"
+          style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;fontSize=10;fontStyle=1;dashed=1;dashPattern=6 3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=block;endFill=1;strokeColor=#8C4FFF;fontColor=#000000;labelBackgroundColor=#ffffff;labelBorderColor=none;"
+          value="5. Snapshot periódico">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend" parent="1"
+          style="text;html=1;strokeColor=#CCCCCC;fillColor=#FAFAFA;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=11;spacingLeft=8;spacingRight=8;spacingTop=6;spacingBottom=6;"
+          value="&lt;b&gt;Legenda&lt;/b&gt;&lt;br&gt;─── Fluxo principal&lt;br&gt;- - - Backup periódico (Snapshot)" vertex="1">
+          <mxGeometry height="70" width="260" x="65" y="430" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
