@@ -4,7 +4,9 @@ Desafio do curso **GFT - Fundamentos de Cloud com AWS** na [DIO](https://www.dio
 
 ## Cenário
 
-Pipeline de processamento de imagens utilizando serviços AWS.
+Imagine uma plataforma onde vendedores enviam fotos de produtos que precisam ser padronizadas antes de ir ao ar — redimensionamento, normalização de cores, remoção de fundo. O volume de uploads é imprevisível e o processamento exige bibliotecas pesadas de visão computacional.
+
+Esta arquitetura resolve isso de forma escalável: o upload cai num bucket S3, que dispara automaticamente uma função Lambda. O Lambda valida o arquivo e aciona uma instância EC2 — escolhida pelo controle de ambiente necessário para as bibliotecas de processamento. A imagem resultante vai para um segundo bucket S3, disponível para a plataforma. O EBS garante persistência entre execuções da EC2, e os Snapshots periódicos protegem contra perda de dados.
 
 ## Diagrama
 
