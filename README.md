@@ -39,3 +39,22 @@ Pipeline de processamento de imagens utilizando serviços AWS.
 | 4 | EC2 ↔ EBS | Leitura / Escrita | EC2 lê a aplicação e grava arquivos temporários no volume EBS durante o processamento |
 | 5 | EC2 → S3 (processadas) | Gravação | EC2 salva a imagem processada no bucket de saída |
 | 6 | EBS → EBS Snapshot | Snapshot periódico | Backup automático do volume EBS armazenado internamente pela AWS |
+
+---
+
+## Aprendizados
+
+### EC2 (Elastic Compute Cloud)
+Máquina virtual na nuvem com controle total sobre SO, runtime e configurações. Ideal para workloads que exigem processamento contínuo ou customização de ambiente — ao contrário do Lambda, permanece ativa enquanto ligada e cobra por tempo de uso.
+
+### S3 (Simple Storage Service)
+Armazenamento de objetos altamente durável e escalável. Não é um sistema de arquivos: cada objeto é acessado por uma chave única dentro de um bucket. Eventos nativos (como `s3:ObjectCreated`) permitem acionar outros serviços automaticamente, sem polling.
+
+### EBS (Elastic Block Store)
+Volume de bloco persistente acoplado à EC2 — funciona como um HD externo na nuvem. Os dados sobrevivem a reinicializações da instância, mas o volume fica vinculado a uma única EC2 por vez e à mesma zona de disponibilidade.
+
+### EBS Snapshot
+Cópia incremental do volume EBS armazenada no S3 (gerenciado pela AWS). Apenas os blocos alterados desde o último snapshot são gravados, tornando o processo eficiente em custo e tempo. Útil para backup, migração entre regiões e criação de AMIs.
+
+### Lambda
+Execução de código orientada a eventos sem gerenciar servidor. Cobra apenas pelo tempo de execução (em ms) e escala automaticamente. Perfeito como orquestrador leve: recebe o evento do S3 e delega o processamento pesado para a EC2, mantendo cada serviço na sua responsabilidade.
